@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Medfuture — NZ SEO Market Demand</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F5F7FA;--surface:#FFF;--border:#E2E8F0;
+  --text:#1A202C;--muted:#718096;--accent:#1B6CA8;
+  --vol-bar:#3182CE;--vol-bg:#EBF4FF;
+  --cand-bg:#EBF8FF;--cand-txt:#2B6CB0;
+  --pend-bg:#FFF7E6;--pend-txt:#B7791F;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0F172A;--surface:#1E293B;--border:#334155;
+  --text:#F1F5F9;--muted:#94A3B8;--accent:#3B82F6;
+  --vol-bar:#60A5FA;--vol-bg:#1E3A5F;
+  --cand-bg:#1E3A5F;--cand-txt:#93C5FD;
+  --pend-bg:#2D2008;--pend-txt:#F6AD55;
+}}
+:root[data-theme="light"]{
+  --bg:#F5F7FA;--surface:#FFF;--border:#E2E8F0;
+  --text:#1A202C;--muted:#718096;--accent:#1B6CA8;
+  --vol-bar:#3182CE;--vol-bg:#EBF4FF;
+  --cand-bg:#EBF8FF;--cand-txt:#2B6CB0;
+  --pend-bg:#FFF7E6;--pend-txt:#B7791F;
+}
+:root[data-theme="dark"]{
+  --bg:#0F172A;--surface:#1E293B;--border:#334155;
+  --text:#F1F5F9;--muted:#94A3B8;--accent:#3B82F6;
+  --vol-bar:#60A5FA;--vol-bg:#1E3A5F;
+  --cand-bg:#1E3A5F;--cand-txt:#93C5FD;
+  --pend-bg:#2D2008;--pend-txt:#F6AD55;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:var(--bg);color:var(--text);font-size:14px;min-height:100vh}
+.hdr{background:var(--accent);color:#fff;padding:14px 24px;display:flex;
+  align-items:center;gap:12px;position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 10px rgba(0,0,0,.2)}
+.hdr h1{font-size:17px;font-weight:700;letter-spacing:-.3px}
+.hdr small{font-size:12px;opacity:.75;margin-left:auto}
+.tabs{background:var(--surface);border-bottom:1px solid var(--border);
+  padding:0 24px;display:flex;position:sticky;top:52px;z-index:99;overflow-x:auto}
+.tab{padding:11px 18px;cursor:pointer;font-size:13px;font-weight:600;
+  color:var(--muted);border-bottom:2px solid transparent;white-space:nowrap;
+  transition:all .15s;user-select:none}
+.tab:hover{color:var(--accent)}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.toolbar{padding:14px 24px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;max-width:1100px;margin:0 auto}
+.cnt{font-size:12px;color:var(--muted);margin-left:auto}
+.wrap{padding:0 24px 48px;max-width:1100px;margin:0 auto}
+.section{margin-bottom:12px}
+.shdr{display:flex;align-items:center;gap:10px;padding:10px 16px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:8px 8px 0 0;border-bottom:none;font-weight:700;
+  font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.sdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.scnt{margin-left:auto;font-weight:400;font-size:11px;opacity:.7}
+.tbl-wrap{width:100%;overflow-x:auto}
+table{width:100%;table-layout:fixed;border-collapse:collapse;background:var(--surface);
+  border:1px solid var(--border);border-radius:0 0 8px 8px}
+col.c-num {width:48px}
+col.c-kw  {width:auto}
+col.c-tgt {width:130px}
+col.c-typ {width:100px}
+col.c-vol {width:160px}
+thead th{padding:7px 12px;font-size:11px;font-weight:600;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.5px;background:var(--bg);
+  border-bottom:1px solid var(--border);text-align:left;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+tbody tr{border-bottom:1px solid var(--border);transition:background .1s}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{filter:brightness(.97)}
+td{padding:9px 12px;vertical-align:middle;overflow:hidden;text-overflow:ellipsis}
+.n{text-align:center;font-size:12px;font-weight:700;
+  color:var(--muted);position:relative;padding-left:14px}
+.bar{position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:0 2px 2px 0}
+.kw{font-size:13px;font-weight:500;white-space:normal;overflow-wrap:anywhere}
+.tgt{font-size:12px;color:var(--muted);white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;text-align:center}
+.cand{background:var(--cand-bg);color:var(--cand-txt);font-size:11px;
+  font-weight:600;padding:3px 9px;border-radius:6px;white-space:nowrap;
+  display:inline-block}
+.vc{display:flex;align-items:center;gap:8px}
+.vn{font-size:13px;font-weight:700;min-width:38px;text-align:right;
+  font-variant-numeric:tabular-nums;flex-shrink:0}
+.vbw{flex:1;height:5px;background:var(--vol-bg);border-radius:3px;overflow:hidden;min-width:40px}
+.vbf{height:100%;background:var(--vol-bar);border-radius:3px}
+.empty{text-align:center;padding:48px;color:var(--muted)}
+.nq-section{margin-bottom:12px;border:1px solid #F6D860;border-radius:8px;overflow:hidden}
+.nq-row{display:flex;align-items:center;padding:10px 16px;background:#FFFBEA;
+  border-bottom:1px solid #F6E88A;font-size:13px;font-style:italic;color:#92660A}
+.nq-row:last-child{border-bottom:none}
+.nq-dot{width:6px;height:6px;border-radius:50%;background:#D4A017;flex-shrink:0;margin-right:10px}
+@media(prefers-color-scheme:dark){
+  .nq-section{border-color:#5A4500}
+  .nq-row{background:#2D2008;color:#F6AD55;border-bottom-color:#5A4500}
+}
+:root[data-theme="dark"] .nq-section{border-color:#5A4500}
+:root[data-theme="dark"] .nq-row{background:#2D2008;color:#F6AD55;border-bottom-color:#5A4500}
+.zero-row td{padding:8px 12px;background:#FAFAFA;border-top:1px dashed var(--border)}
+@media(prefers-color-scheme:dark){.zero-row td{background:#161E2E}}
+:root[data-theme="dark"] .zero-row td{background:#161E2E}
+.zero-label{font-size:11px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.5px}
+.view-toggle{display:flex;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;flex-shrink:0;margin-right:8px}
+.vt-btn{padding:7px 16px;font-size:12px;font-weight:600;cursor:pointer;
+  background:var(--surface);color:var(--muted);border:none;transition:all .15s}
+.vt-btn.active{background:var(--accent);color:#fff}
+.city-total{font-size:15px;font-weight:800;font-variant-numeric:tabular-nums}
+.kw-chips{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.6;display:flex;flex-wrap:wrap;gap:3px}
+.kw-chip{display:inline-block;background:var(--bg);border:1px solid var(--border);
+  border-radius:4px;padding:1px 6px;white-space:normal;overflow-wrap:anywhere;vertical-align:middle}
+.kw-more{display:inline-block;font-size:11px;color:var(--accent);padding:1px 7px;
+  background:var(--accent)18;border:1px solid var(--accent)40;border-radius:4px;
+  cursor:default;user-select:none;font-weight:600;vertical-align:middle;margin-left:4px}
+#kw-floating-dd{display:none;position:fixed;z-index:9999;background:var(--surface);
+  border:1px solid var(--border);border-radius:8px;box-shadow:0 6px 24px #0003;
+  padding:6px 0;min-width:280px;max-width:420px}
+.kw-dd-item{padding:7px 14px;font-size:12px;display:flex;justify-content:space-between;
+  align-items:center;gap:12px;color:var(--text)}
+.kw-dd-item:hover{background:var(--bg)}
+.kw-dd-item b{color:var(--accent);white-space:nowrap;font-variant-numeric:tabular-nums}
+.kw-chips-wrap{position:relative}
+.cntry-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600;
+  padding:2px 8px;margin:2px 3px 2px 0;border-radius:4px;
+  background:var(--accent)18;color:var(--accent);border:1px solid var(--accent)35}
+.cntry-vol{font-size:11px;font-weight:800;color:var(--text);font-variant-numeric:tabular-nums;
+  background:var(--border);border-radius:3px;padding:0 4px;margin-left:2px}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2">
+    <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+  </svg>
+  <h1>medfuture — SEO Market Demand</h1>
+  <small>Keyword Intelligence Dashboard</small>
+</div>
+<div class="tabs" id="tabs"></div>
+<div class="toolbar">
+  <div class="cnt" id="cnt"></div>
+</div>
+<div class="wrap" id="content"></div>
+<div id="kw-floating-dd"></div>
+
+<script>
+const NO_QUERY = {
+  "General Practitioner": ["PGY 3 Doctors", "GPEP GP", "Telehealth GP Jobs"],
+  "Occupational Therapist": ["Paediatric OT Jobs", "Community OT Jobs", "Hospital OT Jobs", "Rehabilitation OT", "OT Vacancies NZ"],
+  "Speech Pathologist": ["Speech Pathologist Jobs NZ", "SLT Jobs New Zealand", "Dysphagia Therapist", "Community SLT Jobs"],
+  "Physiotherapist": ["MSK Physiotherapist"],
+  "Nurse Practitioner": ["Primary Care NP", "Emergency NP", "Mental Health NP", "Rural Nurse Practitioner", "General Practice NP", "Telehealth NP"]
+};
+
+const RAW = {
+  "SIMG": [],
+  "GP": [
+    {"keyword": "general practitioner jobs nz", "seed": "General Practitioner Jobs NZ", "target": "New Zealand", "au_volume": 110},
+    {"keyword": "gp jobs nz", "seed": "GP Jobs NZ", "target": "New Zealand", "au_volume": 90},
+    {"keyword": "junior doctor jobs new zealand", "seed": "Doctor Jobs New Zealand", "target": "New Zealand", "au_volume": 30},
+    {"keyword": "new zealand doctor jobs", "seed": "Doctor Jobs New Zealand", "target": "New Zealand", "au_volume": 30},
+    {"keyword": "gp locum rates nz", "seed": "Locum GP NZ", "target": "New Zealand", "au_volume": 30},
+    {"keyword": "new zealand locum doctor jobs", "seed": "Doctor Jobs New Zealand", "target": "New Zealand", "au_volume": 20},
+    {"keyword": "gp locum nz", "seed": "Locum GP NZ", "target": "New Zealand", "au_volume": 20},
+    {"keyword": "locum gp nz", "seed": "Locum GP NZ", "target": "New Zealand", "au_volume": 20},
+    {"keyword": "medicross urgent care & gp clinic new plymouth", "seed": "Urgent Care GP", "target": "New Plymouth", "au_volume": 20},
+    {"keyword": "frnzcgp nz", "seed": "FRNZCGP", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "cambridge nz gp job", "seed": "GP Jobs NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "gp job nz classified", "seed": "GP Jobs NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "gp jobs chch nz", "seed": "GP Jobs NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "gp jobs co nz", "seed": "GP Jobs NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "gp jobs southland nz", "seed": "GP Jobs NZ", "target": "Invercargill", "au_volume": 0},
+    {"keyword": "gp locum jobs nz", "seed": "GP Jobs NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "gp office mental health nursing jobs nz", "seed": "GP Jobs NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "gp registrar nz jobs", "seed": "GP Jobs NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "nz gp job", "seed": "GP Jobs NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "nz gp job auckland", "seed": "GP Jobs NZ", "target": "Auckland", "au_volume": 0},
+    {"keyword": "nz gp job east auckland", "seed": "GP Jobs NZ", "target": "Auckland", "au_volume": 0},
+    {"keyword": "nz gp on jobs", "seed": "GP Jobs NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "private gp job opportunities nz", "seed": "GP Jobs NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "private gp job opportunities vs public gp job opportunities nz", "seed": "GP Jobs NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "ayurveda doctor jobs in new zealand", "seed": "Doctor Jobs New Zealand", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "doctor jobs wellington new zealand", "seed": "Doctor Jobs New Zealand", "target": "Wellington", "au_volume": 0},
+    {"keyword": "locum doctor jobs in new zealand", "seed": "Doctor Jobs New Zealand", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "recruitment for doctors jobs new zealand", "seed": "Doctor Jobs New Zealand", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "research doctor job new zealand", "seed": "Doctor Jobs New Zealand", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "saw doctor jobs new zealand", "seed": "Doctor Jobs New Zealand", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "jobs medical officer auckland", "seed": "Medical Officer Jobs", "target": "Auckland", "au_volume": 0},
+    {"keyword": "medical officer job auckland", "seed": "Medical Officer Jobs", "target": "Auckland", "au_volume": 0},
+    {"keyword": "medical officer jobs in new zealand", "seed": "Medical Officer Jobs", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "gp job vacancies new zealand", "seed": "GP Vacancies New Zealand", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "rural gp jobs new zealand", "seed": "Rural GP Jobs", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "gp locum vacancy nz", "seed": "Locum GP NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "locum gp salary nz", "seed": "Locum GP NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "nz afterhour gp locum rates", "seed": "Locum GP NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "nz gp locum", "seed": "Locum GP NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "tax deduction locum gp nz", "seed": "Locum GP NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "white cross healthcare lunn ave urgent care and gp auckland", "seed": "Urgent Care GP", "target": "Auckland", "au_volume": 0},
+    {"keyword": "whitecross new lynn urgent care and gp auckland", "seed": "Urgent Care GP", "target": "Auckland", "au_volume": 0},
+    {"keyword": "general practice jobs nz", "seed": "General Practice Jobs", "target": "New Zealand", "au_volume": 0}
+  ],
+  "OT": [
+    {"keyword": "ot jobs nz", "seed": "OT Jobs NZ", "target": "New Zealand", "au_volume": 210},
+    {"keyword": "occupational therapy jobs nz", "seed": "Occupational Therapy Jobs", "target": "New Zealand", "au_volume": 140},
+    {"keyword": "occupational therapy jobs auckland", "seed": "Occupational Therapy Jobs", "target": "Auckland", "au_volume": 110},
+    {"keyword": "occupational therapy jobs christchurch", "seed": "Occupational Therapy Jobs", "target": "Christchurch", "au_volume": 20},
+    {"keyword": "occupational therapy jobs dunedin", "seed": "Occupational Therapy Jobs", "target": "Dunedin", "au_volume": 20},
+    {"keyword": "occupational therapy jobs hamilton", "seed": "Occupational Therapy Jobs", "target": "Hamilton", "au_volume": 20},
+    {"keyword": "occupational therapy jobs new zealand", "seed": "Occupational Therapy Jobs", "target": "New Zealand", "au_volume": 20},
+    {"keyword": "child developent occupational therapist job nz", "seed": "Occupational Therapist Jobs NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "occupational therapist assistant job wellington nz", "seed": "Occupational Therapist Jobs NZ", "target": "Wellington", "au_volume": 0},
+    {"keyword": "amp occupational therapy job nz", "seed": "Occupational Therapy Jobs", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "ngo jobs auckland occupational therapy", "seed": "Occupational Therapy Jobs", "target": "Auckland", "au_volume": 0},
+    {"keyword": "occupational therapy assistant jobs hamilton nz", "seed": "Occupational Therapy Jobs", "target": "Hamilton", "au_volume": 0},
+    {"keyword": "occupational therapy assistant jobs in auckland", "seed": "Occupational Therapy Jobs", "target": "Auckland", "au_volume": 0},
+    {"keyword": "occupational therapy assistant jobs in new zealand", "seed": "Occupational Therapy Jobs", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "occupational therapy invercargill jobs", "seed": "Occupational Therapy Jobs", "target": "Invercargill", "au_volume": 0},
+    {"keyword": "occupational therapy job description nz", "seed": "Occupational Therapy Jobs", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "occupational therapy jobs christchurch nz", "seed": "Occupational Therapy Jobs", "target": "Christchurch", "au_volume": 0},
+    {"keyword": "occupational therapy jobs dunedin fl", "seed": "Occupational Therapy Jobs", "target": "Dunedin", "au_volume": 0},
+    {"keyword": "occupational therapy jobs hanilton nz", "seed": "Occupational Therapy Jobs", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "occupational therapy jobs hawkes bay", "seed": "Occupational Therapy Jobs", "target": "Napier", "au_volume": 0},
+    {"keyword": "occupational therapy jobs nelson", "seed": "Occupational Therapy Jobs", "target": "Nelson", "au_volume": 0},
+    {"keyword": "occupational therapy jobs queenstown", "seed": "Occupational Therapy Jobs", "target": "Queenstown", "au_volume": 0},
+    {"keyword": "occupational therapy jobs rotorua", "seed": "Occupational Therapy Jobs", "target": "Rotorua", "au_volume": 0},
+    {"keyword": "occupational therapy jobs salary in new zealand", "seed": "Occupational Therapy Jobs", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "occupational therapy jobs taranaki", "seed": "Occupational Therapy Jobs", "target": "New Plymouth", "au_volume": 0},
+    {"keyword": "occupational therapy jobs waikato", "seed": "Occupational Therapy Jobs", "target": "Hamilton", "au_volume": 0},
+    {"keyword": "occupational therapy nz jobs", "seed": "Occupational Therapy Jobs", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "occupational therapy southland jobs", "seed": "Occupational Therapy Jobs", "target": "Invercargill", "au_volume": 0},
+    {"keyword": "private practice occupational therapy jobs auckland mental health", "seed": "Occupational Therapy Jobs", "target": "Auckland", "au_volume": 0},
+    {"keyword": "tauranga occupational therapy job opportunities", "seed": "Occupational Therapy Jobs", "target": "Tauranga", "au_volume": 0},
+    {"keyword": "ot and mental health nz", "seed": "Mental Health OT", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "hand therapist job nz", "seed": "Hand Therapist Jobs", "target": "New Zealand", "au_volume": 0}
+  ],
+  "SLT": [
+    {"keyword": "speech language therapy jobs nz", "seed": "Speech Therapy Jobs", "target": "New Zealand", "au_volume": 210},
+    {"keyword": "speech therapy jobs new zealand", "seed": "Speech Therapy Jobs", "target": "New Zealand", "au_volume": 210},
+    {"keyword": "speech therapy jobs nz", "seed": "Speech Therapy Jobs", "target": "New Zealand", "au_volume": 210},
+    {"keyword": "speech therapy jobs auckland", "seed": "Speech Therapy Jobs", "target": "Auckland", "au_volume": 20},
+    {"keyword": "speech language therapist job nz", "seed": "Speech Language Therapist Jobs NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "speech language therapist jobs nz", "seed": "Speech Language Therapist Jobs NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "nz speech therapy jobs", "seed": "Speech Therapy Jobs", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "speech and language therapy jobs nz", "seed": "Speech Therapy Jobs", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "speech language therapy jobs tauranga", "seed": "Speech Therapy Jobs", "target": "Tauranga", "au_volume": 0},
+    {"keyword": "speech therapy jobs christchurch", "seed": "Speech Therapy Jobs", "target": "Christchurch", "au_volume": 0},
+    {"keyword": "speech therapy jobs tauranga", "seed": "Speech Therapy Jobs", "target": "Tauranga", "au_volume": 0},
+    {"keyword": "speech therapy new zealand jobs", "seed": "Speech Therapy Jobs", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "referral to speech language therapists for adults nz", "seed": "Adult Speech Therapist", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "speech and language therapist southland hospital", "seed": "Hospital Speech Therapist", "target": "Invercargill", "au_volume": 0}
+  ],
+  "Physio": [
+    {"keyword": "physiotherapy jobs auckland", "seed": "Physiotherapy Jobs", "target": "Auckland", "au_volume": 110},
+    {"keyword": "physiotherapy jobs new zealand", "seed": "Physiotherapy Jobs", "target": "New Zealand", "au_volume": 110},
+    {"keyword": "physiotherapy jobs nz", "seed": "Physiotherapy Jobs", "target": "New Zealand", "au_volume": 110},
+    {"keyword": "physio jobs nz", "seed": "Physio Jobs NZ", "target": "New Zealand", "au_volume": 40},
+    {"keyword": "sports therapy physiotherapists nelson", "seed": "Sports Physiotherapist", "target": "Nelson", "au_volume": 30},
+    {"keyword": "physio assistant jobs nz", "seed": "Physio Jobs NZ", "target": "New Zealand", "au_volume": 20},
+    {"keyword": "physiotherapy assistant jobs auckland", "seed": "Physiotherapy Jobs", "target": "Auckland", "au_volume": 20},
+    {"keyword": "physiotherapy assistant jobs in new zealand", "seed": "Physiotherapy Jobs", "target": "New Zealand", "au_volume": 20},
+    {"keyword": "physiotherapy assistant jobs nz", "seed": "Physiotherapy Jobs", "target": "New Zealand", "au_volume": 20},
+    {"keyword": "physiotherapy jobs in new zealand for foreigners", "seed": "Physiotherapy Jobs", "target": "New Zealand", "au_volume": 20},
+    {"keyword": "physiotherapy jobs queenstown", "seed": "Physiotherapy Jobs", "target": "Queenstown", "au_volume": 20},
+    {"keyword": "physiotherapy jobs wellington", "seed": "Physiotherapy Jobs", "target": "Wellington", "au_volume": 20},
+    {"keyword": "sports physiotherapist salary nz", "seed": "Sports Physiotherapist", "target": "New Zealand", "au_volume": 20},
+    {"keyword": "physiotherapy jobs christchurch", "seed": "Physiotherapy Jobs", "target": "Christchurch", "au_volume": 10},
+    {"keyword": "assistant physiotherapist jobs in nz", "seed": "Physiotherapist Jobs NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "overseas physiotherapist job nz", "seed": "Physiotherapist Jobs NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "physiotherapist assistant jobs in nz", "seed": "Physiotherapist Jobs NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "physiotherapist job nz", "seed": "Physiotherapist Jobs NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "locum physio jobs nz", "seed": "Physio Jobs NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "new grad physio jobs nz", "seed": "Physio Jobs NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "physio assistant job nz", "seed": "Physio Jobs NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "physio nz jobs", "seed": "Physio Jobs NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "auckland dhb physiotherapy jobs", "seed": "Physiotherapy Jobs", "target": "Auckland", "au_volume": 0},
+    {"keyword": "auckland hospital physiotherapy jobs", "seed": "Physiotherapy Jobs", "target": "Auckland", "au_volume": 0},
+    {"keyword": "christchurch physiotherapy jobs", "seed": "Physiotherapy Jobs", "target": "Christchurch", "au_volume": 0},
+    {"keyword": "do indian physiotherapy get job in nz", "seed": "Physiotherapy Jobs", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "hospital based physiotherapy jobs terms and conditions nz", "seed": "Physiotherapy Jobs", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "how to get a physiotherapy job in new zealand", "seed": "Physiotherapy Jobs", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "jobs physiotherapy new zealand", "seed": "Physiotherapy Jobs", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "locum physiotherapy jobs nz", "seed": "Physiotherapy Jobs", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "nelson physiotherapy jobs", "seed": "Physiotherapy Jobs", "target": "Nelson", "au_volume": 0},
+    {"keyword": "new graduate physiotherapy jobs nz", "seed": "Physiotherapy Jobs", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "physiotherapy assistant jobs in invercargill", "seed": "Physiotherapy Jobs", "target": "Invercargill", "au_volume": 0},
+    {"keyword": "physiotherapy christchurch job", "seed": "Physiotherapy Jobs", "target": "Christchurch", "au_volume": 0},
+    {"keyword": "physiotherapy job nz", "seed": "Physiotherapy Jobs", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "physiotherapy jobs bay of plenty", "seed": "Physiotherapy Jobs", "target": "Tauranga", "au_volume": 0},
+    {"keyword": "physiotherapy jobs christchurch nz", "seed": "Physiotherapy Jobs", "target": "Christchurch", "au_volume": 0},
+    {"keyword": "physiotherapy jobs dunedin", "seed": "Physiotherapy Jobs", "target": "Dunedin", "au_volume": 0},
+    {"keyword": "physiotherapy jobs hamilton nz", "seed": "Physiotherapy Jobs", "target": "Hamilton", "au_volume": 0},
+    {"keyword": "physiotherapy jobs in greymouth", "seed": "Physiotherapy Jobs", "target": "Greymouth", "au_volume": 0},
+    {"keyword": "physiotherapy jobs in new plymouth", "seed": "Physiotherapy Jobs", "target": "New Plymouth", "au_volume": 0},
+    {"keyword": "physiotherapy jobs in new zealand for indian", "seed": "Physiotherapy Jobs", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "physiotherapy jobs nelson nz", "seed": "Physiotherapy Jobs", "target": "Nelson", "au_volume": 0},
+    {"keyword": "physiotherapy jobs new plymouth", "seed": "Physiotherapy Jobs", "target": "New Plymouth", "au_volume": 0},
+    {"keyword": "physiotherapy jobs palmerston north", "seed": "Physiotherapy Jobs", "target": "Palmerston North", "au_volume": 0},
+    {"keyword": "physiotherapy jobs queenstown nz", "seed": "Physiotherapy Jobs", "target": "Queenstown", "au_volume": 0},
+    {"keyword": "physiotherapy jobs rotorua", "seed": "Physiotherapy Jobs", "target": "Rotorua", "au_volume": 0},
+    {"keyword": "physiotherapy jobs tauranga", "seed": "Physiotherapy Jobs", "target": "Tauranga", "au_volume": 0},
+    {"keyword": "physiotherapy jobs waikato", "seed": "Physiotherapy Jobs", "target": "Hamilton", "au_volume": 0},
+    {"keyword": "physiotherapy jobs wellington nz", "seed": "Physiotherapy Jobs", "target": "Wellington", "au_volume": 0},
+    {"keyword": "physiotherapy lecturer jobs new zealand", "seed": "Physiotherapy Jobs", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "physiotherapy new plymouth job", "seed": "Physiotherapy Jobs", "target": "New Plymouth", "au_volume": 0},
+    {"keyword": "physiotherapy new zealand job", "seed": "Physiotherapy Jobs", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "physiotherapy nz job", "seed": "Physiotherapy Jobs", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "physiotherapy post graduate job opportunity nz", "seed": "Physiotherapy Jobs", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "queenstown physiotherapy jobs", "seed": "Physiotherapy Jobs", "target": "Queenstown", "au_volume": 0},
+    {"keyword": "sports physiotherapy jobs new zealand", "seed": "Physiotherapy Jobs", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "sports physiotherapy jobs nz", "seed": "Physiotherapy Jobs", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "tauranga physiotherapy jobs", "seed": "Physiotherapy Jobs", "target": "Tauranga", "au_volume": 0},
+    {"keyword": "trademe jobs physiotherapy auckland", "seed": "Physiotherapy Jobs", "target": "Auckland", "au_volume": 0},
+    {"keyword": "veterinary physiotherapy jobs new zealand", "seed": "Physiotherapy Jobs", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "wellington physiotherapy jobs", "seed": "Physiotherapy Jobs", "target": "Wellington", "au_volume": 0},
+    {"keyword": "what jobs can a physiotherapy degree get you nz", "seed": "Physiotherapy Jobs", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "sport physiotherapist porirua", "seed": "Sports Physiotherapist", "target": "Porirua", "au_volume": 0},
+    {"keyword": "sport physiotherapist wellington", "seed": "Sports Physiotherapist", "target": "Wellington", "au_volume": 0},
+    {"keyword": "sport physiotherapists in greenmeadows nz", "seed": "Sports Physiotherapist", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "sports physiotherapist auckland", "seed": "Sports Physiotherapist", "target": "Auckland", "au_volume": 0},
+    {"keyword": "sports physiotherapist hamilton", "seed": "Sports Physiotherapist", "target": "Hamilton", "au_volume": 0},
+    {"keyword": "sports physiotherapist salary new zealand", "seed": "Sports Physiotherapist", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "sports physiotherapist wellington", "seed": "Sports Physiotherapist", "target": "Wellington", "au_volume": 0},
+    {"keyword": "sports physiotherapist whangarei", "seed": "Sports Physiotherapist", "target": "Whangarei", "au_volume": 0},
+    {"keyword": "community service physiotherapists hamilton", "seed": "Community Physiotherapist", "target": "Hamilton", "au_volume": 0},
+    {"keyword": "auckland city hospital physio job", "seed": "Hospital Physio Jobs", "target": "Auckland", "au_volume": 0},
+    {"keyword": "physio hospital jobs auckland", "seed": "Hospital Physio Jobs", "target": "Auckland", "au_volume": 0},
+    {"keyword": "physio jobs auckland city hospital", "seed": "Hospital Physio Jobs", "target": "Auckland", "au_volume": 0}
+  ],
+  "Podiatrist": [
+    {"keyword": "podiatry jobs new zealand", "seed": "Podiatry Jobs New Zealand", "target": "New Zealand", "au_volume": 20},
+    {"keyword": "sports lab physio & podiatrist auckland", "seed": "Sports Podiatrist", "target": "Auckland", "au_volume": 10},
+    {"keyword": "foot and ankle specialist auckland", "seed": "Foot & Ankle Specialist", "target": "Auckland", "au_volume": 10},
+    {"keyword": "podiatrist job description nz", "seed": "Podiatrist Jobs NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "diabetes foot care nz", "seed": "Diabetes Foot Care", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "acc sports lab physio & podiatrist auckland", "seed": "Sports Podiatrist", "target": "Auckland", "au_volume": 0},
+    {"keyword": "sport podiatrist auckland", "seed": "Sports Podiatrist", "target": "Auckland", "au_volume": 0},
+    {"keyword": "sport podiatrist christchurch", "seed": "Sports Podiatrist", "target": "Christchurch", "au_volume": 0},
+    {"keyword": "sports podiatrist auckland dale", "seed": "Sports Podiatrist", "target": "Auckland", "au_volume": 0},
+    {"keyword": "sports podiatrist christchurch", "seed": "Sports Podiatrist", "target": "Christchurch", "au_volume": 0},
+    {"keyword": "sports podiatrist hamilton", "seed": "Sports Podiatrist", "target": "Hamilton", "au_volume": 0},
+    {"keyword": "sports podiatrist tauranga", "seed": "Sports Podiatrist", "target": "Tauranga", "au_volume": 0},
+    {"keyword": "sports podiatrist wellington", "seed": "Sports Podiatrist", "target": "Wellington", "au_volume": 0},
+    {"keyword": "sports podiatrist whangarei", "seed": "Sports Podiatrist", "target": "Whangarei", "au_volume": 0},
+    {"keyword": "christchurch podiatrist community services card", "seed": "Community Podiatrist", "target": "Christchurch", "au_volume": 0},
+    {"keyword": "foot and ankle specialist hamilton", "seed": "Foot & Ankle Specialist", "target": "Hamilton", "au_volume": 0},
+    {"keyword": "foot and ankle specialist hamilton nj", "seed": "Foot & Ankle Specialist", "target": "Hamilton", "au_volume": 0},
+    {"keyword": "foot and ankle specialists auckland", "seed": "Foot & Ankle Specialist", "target": "Auckland", "au_volume": 0}
+  ],
+  "NP": [
+    {"keyword": "nurse practitioner jobs nz", "seed": "Nurse Practitioner Jobs NZ", "target": "New Zealand", "au_volume": 70},
+    {"keyword": "nurse practitioner job description nz", "seed": "Nurse Practitioner Jobs NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "np jobs in new zealand", "seed": "NP Jobs New Zealand", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "advanced practice nurse legislation nz", "seed": "Advanced Practice Nurse", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "history of advanced nurse practice in nz", "seed": "Advanced Practice Nurse", "target": "New Zealand", "au_volume": 0}
+  ],
+  "Psychiatrist": [
+    {"keyword": "new zealand psychiatry jobs", "seed": "Psychiatry Jobs New Zealand", "target": "New Zealand", "au_volume": 30},
+    {"keyword": "psychiatrist jobs nz", "seed": "Psychiatrist Jobs NZ", "target": "New Zealand", "au_volume": 20},
+    {"keyword": "forensic psychiatrist nz", "seed": "Forensic Psychiatrist", "target": "New Zealand", "au_volume": 20},
+    {"keyword": "psychiatrist jobs aus nz", "seed": "Psychiatrist Jobs NZ", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "anne young consultant psychiatrist christchurch nz", "seed": "Consultant Psychiatrist", "target": "Christchurch", "au_volume": 0},
+    {"keyword": "cheap psychiatrist consult christchurch", "seed": "Consultant Psychiatrist", "target": "Christchurch", "au_volume": 0},
+    {"keyword": "consultant psychiatrist christchurch", "seed": "Consultant Psychiatrist", "target": "Christchurch", "au_volume": 0},
+    {"keyword": "consultant psychiatrist jobs new zealand", "seed": "Consultant Psychiatrist", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "consultant psychiatrist nz", "seed": "Consultant Psychiatrist", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "consultant psychiatrist tauranga", "seed": "Consultant Psychiatrist", "target": "Tauranga", "au_volume": 0},
+    {"keyword": "how much are consultant psychiatrists paid nz", "seed": "Consultant Psychiatrist", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "what is a consultant psychiatrist nz", "seed": "Consultant Psychiatrist", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "adult adhd christchurch specialist psychiatrist actor", "seed": "Adult Psychiatrist", "target": "Christchurch", "au_volume": 0},
+    {"keyword": "adult adhd psychiatrist christchurch", "seed": "Adult Psychiatrist", "target": "Christchurch", "au_volume": 0},
+    {"keyword": "psychiatrist adult adhd auckland", "seed": "Adult Psychiatrist", "target": "Auckland", "au_volume": 0},
+    {"keyword": "child and adolescent psychiatrist auckland", "seed": "Child & Adolescent Psychiatrist", "target": "Auckland", "au_volume": 0},
+    {"keyword": "addiction psychiatrist auckland", "seed": "Addiction Psychiatrist", "target": "Auckland", "au_volume": 0},
+    {"keyword": "psychiatrist for addiction auckland", "seed": "Addiction Psychiatrist", "target": "Auckland", "au_volume": 0},
+    {"keyword": "forensic psychiatrist auckland", "seed": "Forensic Psychiatrist", "target": "Auckland", "au_volume": 0},
+    {"keyword": "forensic psychiatrist christchurch", "seed": "Forensic Psychiatrist", "target": "Christchurch", "au_volume": 0},
+    {"keyword": "forensic psychiatrist waikato david", "seed": "Forensic Psychiatrist", "target": "Hamilton", "au_volume": 0},
+    {"keyword": "forensic psychiatrist wellington", "seed": "Forensic Psychiatrist", "target": "Wellington", "au_volume": 0},
+    {"keyword": "complaints against specialist mental health and addiction services nz", "seed": "Mental Health Specialist", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "mental health specialists upper hutt", "seed": "Mental Health Specialist", "target": "Upper Hutt", "au_volume": 0},
+    {"keyword": "specialist mental health and addiction services acting unlawfully nz", "seed": "Mental Health Specialist", "target": "New Zealand", "au_volume": 0},
+    {"keyword": "specialist mental health and addiction services breaching human rights nz", "seed": "Mental Health Specialist", "target": "New Zealand", "au_volume": 0}
+  ],
+  "AI": []
+};
+
+const PALETTE=[
+  ["#D4F1F4","#0E6B7A"],["#D5E8D4","#1B5E20"],["#DAE8FC","#1565C0"],
+  ["#E1D5E7","#6A1B9A"],["#FFE6CC","#E65100"],["#FFD5D5","#B71C1C"],
+  ["#FFF3CC","#F57F17"],["#D5F5E3","#145A32"],["#FCE4EC","#880E4F"],
+  ["#E8EAF6","#283593"],["#E0F2F1","#004D40"],["#F3E5F5","#4A148C"],
+  ["#FBE9E7","#BF360C"],["#E0F7FA","#006064"],["#EFEBE9","#4E342E"],
+  ["#F9FBE7","#558B2F"],["#FFF9C4","#F9A825"],["#E3F2FD","#0D47A1"],
+  ["#F1F8E9","#33691E"],["#FDE7F3","#AD1457"]
+];
+const ACCENTS=["#4A90D9","#27AE60","#E67E22","#9B59B6","#E74C3C",
+  "#16A085","#2C3E50","#F39C12","#1ABC9C","#E91E63","#3F51B5","#FF5722"];
+
+function hashColor(n){let h=0;for(let i=0;i<n.length;i++)h=(h*31+n.charCodeAt(i))>>>0;return PALETTE[h%PALETTE.length];}
+
+function fillSeeds(rows){
+  let last="Other";
+  return rows.map(r=>{if(r.seed)last=r.seed;return{...r,seed:last};});
+}
+
+const DATA={};
+// Seed group → profession mappings for MOD and AHP splits
+const MOD_MAP = {};
+const AHP_MAP = {};
+// Renamed simple divisions
+const RENAME = {"GP":"General Practitioner","OT":"Occupational Therapist","SLT":"Speech Pathologist","Physio":"Physiotherapist","Podiatrist":"Podiatrist","NP":"Nurse Practitioner","Psychiatrist":"Psychiatrist","SIMG":"FIMG","AI":"AI / Artificial Intelligence"};
+Object.entries(RAW).forEach(([d,rows])=>{
+  const filled = fillSeeds(rows);
+  if(RENAME[d]){
+    DATA[RENAME[d]] = filled;
+  } else if(d==="MOD"){
+    Object.entries(MOD_MAP).forEach(([name,fn])=>{
+      DATA[name] = filled.filter(r=>fn(r.seed||""));
+    });
+    // fallback: unsorted seeds go to Psychology
+    const matched = filled.filter(r=>Object.values(MOD_MAP).some(fn=>fn(r.seed||"")));
+    const unmatched = filled.filter(r=>!Object.values(MOD_MAP).some(fn=>fn(r.seed||"")));
+    if(unmatched.length) DATA["Psychology"] = (DATA["Psychology"]||[]).concat(unmatched);
+  } else if(d==="AHP"){
+    Object.entries(AHP_MAP).forEach(([name,fn])=>{
+      DATA[name] = filled.filter(r=>fn(r.seed||""));
+    });
+    const unmatched = filled.filter(r=>!Object.values(AHP_MAP).some(fn=>fn(r.seed||"")));
+    if(unmatched.length) DATA["Physio"] = (DATA["Physio"]||[]).concat(unmatched);
+  } else {
+    DATA[d] = filled;
+  }
+});
+
+const COLORS={};
+Object.values(DATA).flat().forEach(r=>{
+  [r.target].filter(Boolean).forEach(l=>{if(!COLORS[l])COLORS[l]=hashColor(l.toLowerCase());});
+});
+
+let active=Object.keys(DATA).find(d=>(DATA[d]&&DATA[d].length>0)||(NO_QUERY[d]&&NO_QUERY[d].length>0))||Object.keys(DATA)[0];
+let currentView='keyword';
+
+function setView(v){
+  currentView=v;
+  document.getElementById("vt-kw").classList.toggle("active",v==="keyword");
+  document.getElementById("vt-city").classList.toggle("active",v==="city");
+  render();
+}
+
+function renderKeywordView(rows){
+  const groups={};
+  rows.forEach(r=>{const s=r.seed||"Other";(groups[s]=groups[s]||[]).push(r);});
+  const mx=Math.max(...rows.map(r=>r.au_volume),1);
+  const sortedGroups=Object.entries(groups).sort(([,a],[,b])=>{
+    return (b.some(r=>r.au_volume>0)?1:0)-(a.some(r=>r.au_volume>0)?1:0);
+  });
+  let idx=1,html="",si=0;
+  for(const[seed,kws]of sortedGroups){
+    const ac=ACCENTS[si++%ACCENTS.length];
+    const withVol=kws.filter(r=>r.au_volume>0).sort((a,b)=>b.au_volume-a.au_volume);
+    const allZero=withVol.length===0;
+    html+=`<div class="section">
+      <div class="shdr"><span class="sdot" style="background:${ac}"></span>${seed}<span class="scnt">${kws.length} kw</span></div>
+      <div class="tbl-wrap"><table>
+        ${typeColgroup()}
+        <thead><tr><th>#</th><th>Keyword</th><th style="text-align:center">Target</th>${typeHeader()}${active!=="SIMG"?"<th>AU Volume</th>":""}</tr></thead>
+        <tbody>`;
+    if(allZero){
+      html+=`<tr class="zero-row"><td colspan="5"><span class="zero-label">No Search Volume</span></td></tr>`;
+    } else {
+      withVol.slice(0,5).forEach(r=>{
+        const pct=mx>0?Math.round(r.au_volume/mx*100):0;
+        html+=`<tr>
+          <td class="n"><span class="bar" style="background:${ac}"></span>${idx++}</td>
+          <td class="kw">${r.keyword}</td>
+          <td class="tgt" style="text-align:center">${resolveTarget(r)||"—"}</td>
+          ${typeCell(r)}
+          ${active!=="SIMG"?'<td><div class="vc"><span class="vn">'+r.au_volume.toLocaleString()+'</span><div class="vbw"><div class="vbf" style="width:'+pct+'%"></div></div></div></td>':""}
+        </tr>`;
+      });
+    }
+    html+=`</tbody></table></div></div>`;
+  }
+
+  return html;
+}
+
+const AI_VOL={"GP":[{"city":"Auckland","state":"AKL","vol":27},{"city":"Canterbury","state":"CAN","vol":18},{"city":"Northland","state":"NTL","vol":16},{"city":"Waikato","state":"WKO","vol":14},{"city":"Hawke's Bay","state":"HKB","vol":11}],"OT":[{"city":"Auckland","state":"AKL","vol":48},{"city":"Canterbury","state":"CAN","vol":18},{"city":"Wellington","state":"WLG","vol":14},{"city":"Waikato","state":"WKO","vol":14},{"city":"Bay of Plenty","state":"BOP","vol":10}],"SLT":[{"city":"Auckland","state":"AKL","vol":7},{"city":"Canterbury","state":"CAN","vol":3},{"city":"Wellington","state":"WLG","vol":2},{"city":"Waikato","state":"WKO","vol":2},{"city":"Bay of Plenty","state":"BOP","vol":1}],"Physio":[{"city":"Auckland","state":"AKL","vol":37},{"city":"Canterbury","state":"CAN","vol":14},{"city":"Wellington","state":"WLG","vol":11},{"city":"Waikato","state":"WKO","vol":11},{"city":"Bay of Plenty","state":"BOP","vol":8}],"Podiatrist":[{"city":"Auckland","state":"AKL","vol":7},{"city":"Canterbury","state":"CAN","vol":3},{"city":"Wellington","state":"WLG","vol":2},{"city":"Waikato","state":"WKO","vol":2},{"city":"Bay of Plenty","state":"BOP","vol":1}],"NP":[{"city":"Auckland","state":"AKL","vol":34},{"city":"Canterbury","state":"CAN","vol":13},{"city":"Wellington","state":"WLG","vol":10},{"city":"Waikato","state":"WKO","vol":10},{"city":"Bay of Plenty","state":"BOP","vol":7}],"Psychiatrist":[{"city":"Auckland","state":"AKL","vol":7},{"city":"Canterbury","state":"CAN","vol":3},{"city":"Wellington","state":"WLG","vol":2},{"city":"Waikato","state":"WKO","vol":2},{"city":"Bay of Plenty","state":"BOP","vol":1}],"SIMG":[{"city":"Auckland","state":"AKL","vol":5},{"city":"Canterbury","state":"CAN","vol":3},{"city":"Northland","state":"NTL","vol":3},{"city":"Hawke's Bay","state":"HKB","vol":2},{"city":"Waikato","state":"WKO","vol":2}],"AI":[{"city":"Auckland","state":"AKL","vol":77},{"city":"Wellington","state":"WLG","vol":35},{"city":"Canterbury","state":"CAN","vol":16},{"city":"Waikato","state":"WKO","vol":11},{"city":"Otago","state":"OTA","vol":8}]};
+
+const AI_LOC={"GP":[{"city":"Auckland","state":"AKL","vol":35},{"city":"Canterbury","state":"CAN","vol":14},{"city":"Wellington","state":"WLG","vol":10},{"city":"Waikato","state":"WKO","vol":10},{"city":"Bay of Plenty","state":"BOP","vol":7}],"OT":[{"city":"Auckland","state":"AKL","vol":55},{"city":"Canterbury","state":"CAN","vol":21},{"city":"Wellington","state":"WLG","vol":16},{"city":"Waikato","state":"WKO","vol":16},{"city":"Bay of Plenty","state":"BOP","vol":11}],"SLT":[{"city":"Auckland","state":"AKL","vol":6},{"city":"Canterbury","state":"CAN","vol":2},{"city":"Wellington","state":"WLG","vol":2},{"city":"Waikato","state":"WKO","vol":2},{"city":"Bay of Plenty","state":"BOP","vol":1}],"Physio":[{"city":"Auckland","state":"AKL","vol":43},{"city":"Canterbury","state":"CAN","vol":17},{"city":"Wellington","state":"WLG","vol":13},{"city":"Waikato","state":"WKO","vol":13},{"city":"Bay of Plenty","state":"BOP","vol":8}],"Podiatrist":[{"city":"Auckland","state":"AKL","vol":6},{"city":"Canterbury","state":"CAN","vol":2},{"city":"Wellington","state":"WLG","vol":2},{"city":"Waikato","state":"WKO","vol":2},{"city":"Bay of Plenty","state":"BOP","vol":1}],"NP":[{"city":"Auckland","state":"AKL","vol":29},{"city":"Canterbury","state":"CAN","vol":11},{"city":"Wellington","state":"WLG","vol":9},{"city":"Waikato","state":"WKO","vol":9},{"city":"Bay of Plenty","state":"BOP","vol":6}],"Psychiatrist":[{"city":"Auckland","state":"AKL","vol":6},{"city":"Canterbury","state":"CAN","vol":2},{"city":"Wellington","state":"WLG","vol":2},{"city":"Waikato","state":"WKO","vol":2},{"city":"Bay of Plenty","state":"BOP","vol":1}],"SIMG":[{"city":"UK","state":"UK","vol":5},{"city":"India","state":"IN","vol":4},{"city":"South Africa","state":"ZA","vol":3},{"city":"Philippines","state":"PH","vol":2},{"city":"Ireland","state":"IE","vol":1}],"AI":[{"city":"Auckland","state":"AKL","vol":77},{"city":"Wellington","state":"WLG","vol":35},{"city":"Canterbury","state":"CAN","vol":16},{"city":"Waikato","state":"WKO","vol":11}]};
+function renderAiLocSection(divName){
+  const KEY_MAP={
+    "General Practitioner":"GP","Occupational Therapist":"OT","Speech Pathologist":"SLT",
+    "Physiotherapist":"Physio","Podiatrist":"Podiatrist","Nurse Practitioner":"NP",
+    "Psychiatrist":"Psychiatrist","FIMG":"SIMG","AI / Artificial Intelligence":"AI"
+  };
+  const key=KEY_MAP[divName];
+  const rows=key&&AI_LOC[key];
+  if(!rows||!rows.length) return '';
+  const mx=Math.max(...rows.map(r=>r.vol),1);
+  let h=`
+  <div style="margin-top:28px;font-size:11px;font-weight:700;letter-spacing:.07em;color:var(--muted);text-transform:uppercase;margin-bottom:8px;padding-left:2px">
+    &#x1F50D; Where Searchers Are From &mdash; August 2026
+    <span style="font-weight:400;text-transform:none;letter-spacing:0;margin-left:6px;opacity:.6">AI-estimated origin cities of job seekers (Perplexity, Aug 2026)</span>
+  </div>
+  <div class="section"><div class="tbl-wrap"><table>
+    <colgroup><col class="c-num"><col class="c-kw"><col style="width:80px"><col class="c-vol"></colgroup>
+    <thead><tr><th>#</th><th>City</th><th>State</th><th>Est. Monthly Searches</th></tr></thead>
+    <tbody>`;
+  rows.forEach((r,i)=>{
+    const pct=Math.round(r.vol/mx*100);
+    h+=`<tr>
+      <td class="n">${i+1}</td>
+      <td style="text-align:left;padding-left:12px;font-weight:${i<3?'700':'400'};font-size:13px">${r.city}</td>
+      <td style="text-align:center;color:var(--muted);font-size:12px">${r.state}</td>
+      <td><div class="vc"><span class="vn city-total">${r.vol.toLocaleString()}</span><div class="vbw"><div class="vbf" style="width:${pct}%"></div></div></div></td>
+    </tr>`;
+  });
+  h+=`</tbody></table></div></div>`;
+  return h;
+}
+
+function renderAiSection(divName){
+  const KEY_MAP={
+    "General Practitioner":"GP","Occupational Therapist":"OT","Speech Pathologist":"SLT",
+    "Physiotherapist":"Physio","Podiatrist":"Podiatrist","Nurse Practitioner":"NP",
+    "Psychiatrist":"Psychiatrist","FIMG":"SIMG","AI / Artificial Intelligence":"AI"
+  };
+  const key=KEY_MAP[divName];
+  const rows=key&&AI_VOL[key];
+  if(!rows||!rows.length) return '';
+  const mx=Math.max(...rows.map(r=>r.vol),1);
+  let h=`
+  <div style="margin-top:28px;font-size:11px;font-weight:700;letter-spacing:.07em;color:var(--muted);text-transform:uppercase;margin-bottom:8px;padding-left:2px">
+    &#x1F916; AI Estimated City Demand &mdash; August 2026
+    <span style="font-weight:400;text-transform:none;letter-spacing:0;margin-left:6px;opacity:.6">AI-estimated monthly searches by city (Perplexity, Aug 2026)</span>
+  </div>
+  <div class="section"><div class="tbl-wrap"><table>
+    <colgroup><col class="c-num"><col class="c-kw"><col style="width:80px"><col class="c-vol"></colgroup>
+    <thead><tr><th>#</th><th>City</th><th>State</th><th>Est. Monthly Searches</th></tr></thead>
+    <tbody>`;
+  rows.forEach((r,i)=>{
+    const pct=Math.round(r.vol/mx*100);
+    h+=`<tr>
+      <td class="n">${i+1}</td>
+      <td style="text-align:left;padding-left:12px;font-weight:${i<3?'700':'400'};font-size:13px">${r.city}</td>
+      <td style="text-align:center;color:var(--muted);font-size:12px">${r.state}</td>
+      <td><div class="vc"><span class="vn city-total">${r.vol.toLocaleString()}</span><div class="vbw"><div class="vbf" style="width:${pct}%"></div></div></div></td>
+    </tr>`;
+  });
+  h+=`</tbody></table></div></div>`;
+  return h;
+}
+
+function renderCityView(rows){
+  const isSIMG = active==="SIMG";
+  const rowVol = r => isSIMG
+    ? (r.from_countries||[]).filter(x=>SIMG_COLS.includes(x.c)).reduce((s,x)=>s+x.v,0)
+    : (r.au_volume||0);
+
+  // Build city map from keywords (top 5 per seed, au_volume > 0)
+  const groups={};
+  rows.forEach(r=>{const s=r.seed||"Other";(groups[s]=groups[s]||[]).push(r);});
+  const visible=[];
+  Object.values(groups).forEach(kws=>{
+    kws.filter(r=>r.au_volume>0).sort((a,b)=>b.au_volume-a.au_volume).forEach(r=>visible.push(r));
+  });
+  const cityMap={};
+  visible.forEach(r=>{
+    const city=resolveTarget(r)||"Other";
+    if(!city||city==="Australia") return;
+    if(!cityMap[city]) cityMap[city]={total:0,keywords:[]};
+    cityMap[city].total+=rowVol(r);
+    cityMap[city].keywords.push(r);
+  });
+  const sorted=Object.entries(cityMap).filter(([,d])=>d.total>0).sort(([,a],[,b])=>b.total-a.total).slice(0,5);
+  if(!sorted.length) return '<div class="empty">No keywords with volume in this division.</div>';
+
+  const mx=Math.max(...sorted.map(([,d])=>d.total),1);
+  const volHdr = isSIMG ? "Total Int'l Volume" : "Total AU Volume";
+
+  // ── TABLE 1: Target City ─────────────────────────────────────────────────
+  let html=`
+  <div style="font-size:11px;font-weight:700;letter-spacing:.07em;color:var(--muted);text-transform:uppercase;margin-bottom:8px;padding-left:2px">
+    Target City &mdash; Keyword Search Demand
+  </div>
+  <div class="section"><div class="tbl-wrap"><table>
+    <colgroup><col class="c-num"><col class="c-kw"><col style="width:120px"><col class="c-vol"></colgroup>
+    <thead><tr><th>#</th><th>Target City</th><th>Keywords</th><th>${volHdr}</th></tr></thead>
+    <tbody>`;
+  sorted.forEach(([city,d],i)=>{
+    const pct=Math.round(d.total/mx*100);
+    const sorted_kws=d.keywords.sort((a,b)=>rowVol(b)-rowVol(a));
+    const chips=sorted_kws.slice(0,3).map(r=>`<span class="kw-chip">${r.keyword} <b>${rowVol(r).toLocaleString()}</b></span>`).join("");
+    const extraItems=sorted_kws.slice(3).map(r=>`<div class="kw-dd-item"><span>${r.keyword}</span><b>${rowVol(r).toLocaleString()}</b></div>`).join("");
+    const moreHtml=extraItems.replace(/"/g,"&quot;");
+    const more=sorted_kws.length>3?`<span class="kw-more" data-dd="${moreHtml}" onmouseenter="showDd(this)" onmouseleave="hideDd(this)">+${sorted_kws.length-3} more</span>`:"";
+    html+=`<tr>
+      <td class="n">${i+1}</td>
+      <td class="tgt" style="text-align:left;padding-left:12px">
+        <span style="font-weight:700;font-size:13px">${city}</span>
+        <div class="kw-chips kw-chips-wrap">${chips}${more}</div>
+      </td>
+      <td style="text-align:center;color:var(--muted);font-size:12px">${d.keywords.length}</td>
+      <td><div class="vc"><span class="vn city-total">${d.total.toLocaleString()}</span><div class="vbw"><div class="vbf" style="width:${pct}%"></div></div></div></td>
+    </tr>`;
+  });
+  html+=`</tbody></table></div></div>`;
+
+  // ── TABLE 3: Searcher Location ────────────────────────────────────────────
+  if(isSIMG){
+    // SIMG: aggregate from_countries from keywords visible in keyword view (top 5 per seed)
+    const countryTotals={};
+    visible.forEach(r=>{
+      (r.from_countries||[]).forEach(fc=>{
+        countryTotals[fc.c]=(countryTotals[fc.c]||0)+fc.v;
+      });
+    });
+    const topCountries=Object.entries(countryTotals).sort(([,a],[,b])=>b-a).slice(0,10);
+    if(topCountries.length){
+      const cMax=topCountries[0][1];
+      const cTotal=Object.values(countryTotals).reduce((s,v)=>s+v,0);
+      html+=`
+  <div style="margin-top:32px;font-size:11px;font-weight:700;letter-spacing:.07em;color:var(--muted);text-transform:uppercase;margin-bottom:8px;padding-left:2px">
+    🌏 Searcher Origin &mdash; Top 10 Countries
+    <span style="font-weight:400;text-transform:none;letter-spacing:0;margin-left:6px;opacity:.6">Countries where IMG candidates are searching from (SEMrush)</span>
+  </div>
+  <div class="section"><div class="tbl-wrap"><table>
+    <colgroup><col class="c-num"><col class="c-kw"><col class="c-vol"><col style="width:80px"></colgroup>
+    <thead><tr><th>#</th><th>Country</th><th>Search Volume</th><th style="text-align:center">% of Total</th></tr></thead>
+    <tbody>`;
+      topCountries.forEach(([country,vol],i)=>{
+        const pctC=Math.round(vol/cMax*100);
+        const pctOfTotal=((vol/cTotal)*100).toFixed(1);
+        html+=`<tr>
+          <td class="n">${i+1}</td>
+          <td class="tgt" style="text-align:left;padding-left:12px;font-weight:600">${country}</td>
+          <td><div class="vc"><span class="vn">${vol.toLocaleString()}</span><div class="vbw"><div class="vbf" style="width:${pctC}%"></div></div></div></td>
+          <td style="text-align:center;font-size:12px;font-weight:600">${pctOfTotal}%</td>
+        </tr>`;
+      });
+      html+=`</tbody></table></div></div>`;
+    }
+  }
+
+  return html;
+}
+
+function render(){
+  const rows=DATA[active]||[];
+  document.getElementById("cnt").textContent=rows.length+" keyword"+(rows.length!==1?"s":"");
+  const nq=NO_QUERY[active]||[];
+  let html=active==="SIMG" ? (rows.length ? renderKeywordView(rows) : '<div class="empty">No IMG keywords found.</div>') : (rows.length ? renderCityView(rows) : '<div class="empty">No search volume data yet — run KMT for NZ to populate.</div>');
+  if(nq.length){
+    html+=`<div class="nq-section" style="margin-top:16px">`;
+    nq.forEach(s=>{html+=`<div class="nq-row"><span class="nq-dot"></span>${s} — No Related Queries Found</div>`;});
+    html+=`</div>`;
+  }
+  document.getElementById("content").innerHTML=html;
+}
+
+const _dd=document.getElementById("kw-floating-dd");
+let _ddTimer=null;
+function showDd(el){
+  clearTimeout(_ddTimer);
+  _dd.innerHTML=el.dataset.dd;
+  _dd.style.display="block";
+  const r=el.getBoundingClientRect();
+  const ddW=300;
+  let left=r.left;
+  if(left+ddW>window.innerWidth-8) left=window.innerWidth-ddW-8;
+  let top=r.bottom+4;
+  _dd.style.left=left+"px";
+  _dd.style.top=top+"px";
+  _dd.onmouseenter=()=>clearTimeout(_ddTimer);
+  _dd.onmouseleave=()=>{_dd.style.display="none";};
+}
+function hideDd(){
+  _ddTimer=setTimeout(()=>{_dd.style.display="none";},120);
+}
+
+// Seek job counts per division per city (last 31 days) — populated by seek_job_counts.py
+const SEEK = {
+  "General Practitioner": {},
+  "Occupational Therapist": {},
+  "Speech Pathologist": {},
+  "Physiotherapist": {},
+  "Podiatrist": {},
+  "Nurse Practitioner": {},
+  "Psychiatrist": {}
+};
+
+var SIMG_COLS=(function(){
+  if(!RAW.SIMG) return [];
+  var t={};
+  RAW.SIMG.forEach(function(r){(r.from_countries||[]).forEach(function(x){t[x.c]=(t[x.c]||0)+x.v;});});
+  return Object.entries(t).sort(function(a,b){return b[1]-a[1];}).slice(0,8).map(function(x){return x[0];});
+})();
+// State-level target resolver — if keyword mentions a state but no city, use state name
+const STATE_MAP = [
+  {label:"Auckland",       patterns:[/\bauckland\b/i,/\bauck\b/i],         cities:["auckland"]},
+  {label:"Wellington",     patterns:[/\bwellington\b/i,/\bwelly\b/i],      cities:["wellington"]},
+  {label:"Christchurch",   patterns:[/\bchristchurch\b/i,/\bcanterbur/i,/\bchch\b/i], cities:["christchurch"]},
+  {label:"Hamilton",       patterns:[/\bhamilton\b/i,/\bwaikato\b/i],      cities:["hamilton"]},
+  {label:"Tauranga",       patterns:[/\btauranga\b/i,/\bbay of plenty/i],  cities:["tauranga"]},
+  {label:"Dunedin",        patterns:[/\bdunedin\b/i,/\botago\b/i],         cities:["dunedin"]},
+  {label:"Palmerston North",patterns:[/\bpalmerston north\b/i,/\bpalmy\b/i,/\bmanawatu/i],cities:["palmerston north"]},
+  {label:"Napier",         patterns:[/\bnapier\b/i,/\bhawke.?s bay/i,/\bhastings\b/i], cities:["napier","hastings"]},
+  {label:"Nelson",         patterns:[/\bnelson\b/i,/\bmarlborough\b/i],    cities:["nelson"]},
+  {label:"Rotorua",        patterns:[/\brotorua\b/i],                       cities:["rotorua"]},
+];
+function resolveTarget(r){
+  if(r.target && r.target!=='' && r.target!=='New Zealand') return r.target;
+  var kw=(r.keyword||'').toLowerCase();
+  for(var s of STATE_MAP){
+    var hasState=s.patterns.some(p=>p.test(kw));
+    if(hasState){
+      var hasCity=s.cities.some(c=>kw.includes(c));
+      if(!hasCity) return s.label;
+    }
+  }
+  return r.target==='New Zealand' ? 'New Zealand' : '';
+}
+
+function typeColgroup(){
+  if(active!=='SIMG') return '<colgroup><col class="c-num"><col class="c-kw"><col class="c-tgt"><col class="c-typ"><col class="c-vol"></colgroup>';
+  var c='<colgroup><col class="c-num"><col class="c-kw"><col class="c-tgt">';
+  SIMG_COLS.forEach(function(){c+='<col style="width:80px">';});
+  return c+'</colgroup>';
+}
+function typeHeader(){
+  if(active!=='SIMG') return '<th>Type</th>';
+  return SIMG_COLS.map(function(c){return '<th style="text-align:center;font-size:10px;white-space:normal;overflow:visible;word-break:break-word">'+c+'</th>';}).join('');
+}
+function typeCell(r){
+  if(active!=='SIMG') return '<td style="text-align:center"><span class="cand">Candidate</span></td>';
+  var lk={};
+  (r.from_countries||[]).forEach(function(x){lk[x.c]=x.v;});
+  return SIMG_COLS.map(function(c){
+    var v=lk[c]||0;
+    return v>0?'<td style="text-align:center;font-weight:700;font-size:12px;color:var(--accent)">'+v+'</td>'
+              :'<td style="text-align:center;color:var(--border);font-size:12px">—</td>';
+  }).join('');
+}
+const TAB_LABELS={"SIMG":"FIMG"};
+function buildTabs(){
+  const wrap=document.getElementById("tabs");
+  Object.keys(DATA).forEach(d=>{
+    const hasData=DATA[d]&&DATA[d].length>0;
+    const hasNQ=NO_QUERY[d]&&NO_QUERY[d].length>0;
+    if(!hasData&&!hasNQ) return;
+    const t=document.createElement("div");
+    t.className="tab"+(d===active?" active":"");
+    t.textContent=TAB_LABELS[d]||d;
+    t.onclick=()=>{
+      active=d;
+      document.querySelectorAll(".tab").forEach(el=>el.classList.remove("active"));
+      t.classList.add("active");render();
+    };
+    wrap.appendChild(t);
+  });
+}
+
+buildTabs();render();
+</script>
+</body>
+</html>
+
